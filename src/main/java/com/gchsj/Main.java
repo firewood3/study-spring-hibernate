@@ -24,7 +24,12 @@ public class Main {
         personDao.persist(Person.builder().name("hong").build());
 
         StudentDao studentDao = ctx.getBean(StudentDao.class);
-        studentDao.persist(Student.builder().name("seok").birthDay(LocalDateTime.now()).build());
+        Student student = Student.builder().name("seok").birthDay(LocalDateTime.now()).build();
+        studentDao.persist(student);
+        student.setName("changed2");
+        studentDao.flush();
         studentDao.persist(Student.builder().name("jin").gender(Gender.MALE).build());
+        studentDao.delete(student);
+        student.setName("changed1");
     }
 }
