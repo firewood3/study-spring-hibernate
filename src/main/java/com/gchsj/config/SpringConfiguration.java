@@ -1,6 +1,7 @@
 package com.gchsj.config;
 
 import com.gchsj.dao.PersonDao;
+import com.gchsj.dao.StudentDao;
 import com.gchsj.service.HelloService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -24,6 +25,9 @@ public class SpringConfiguration {
 
     @Bean
     public PersonDao personDao() { return new PersonDao(); }
+
+    @Bean
+    public StudentDao studentDao() { return new StudentDao(); }
 
     @Bean
     public LocalSessionFactoryBean sessionFactory() {
