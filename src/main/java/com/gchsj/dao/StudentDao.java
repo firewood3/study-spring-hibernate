@@ -15,7 +15,7 @@ public class StudentDao {
     private SessionFactory sessionFactory;
 
     @Transactional
-    public void persist(Student student) {
+    public void workplace(Student student) {
         Session session;
         try {
             session = sessionFactory.getCurrentSession();
@@ -23,12 +23,69 @@ public class StudentDao {
             session = sessionFactory.openSession();
         }
         session.persist(student); // persistent 상태로 만듦
+        System.out.println("persist");
         student.setGender(Gender.FEMALE);
         session.flush(); // commit 하여 영속화
+        System.out.println("flush");
         session.evict(student); // detached 상태로 만듦
         student.setGender(Gender.MALE);
         session.merge(student); // merge 하여 다시 persistent 상태로 만듦
         session.flush();
+    }
+
+    @Transactional
+    public void persist(Student student) {
+        Session session;
+        try {
+            session = sessionFactory.getCurrentSession();
+        } catch (HibernateException e) {
+            session = sessionFactory.openSession();
+        }
+        session.persist(student);
+    }
+
+    @Transactional
+    public void save(Student student) {
+        Session session;
+        try {
+            session = sessionFactory.getCurrentSession();
+        } catch (HibernateException e) {
+            session = sessionFactory.openSession();
+        }
+        session.save(student);
+    }
+
+    @Transactional
+    public void update(Student student) {
+        Session session;
+        try {
+            session = sessionFactory.getCurrentSession();
+        } catch (HibernateException e) {
+            session = sessionFactory.openSession();
+        }
+        session.update(student);
+    }
+
+    @Transactional
+    public void saveOrUpdate(Student student) {
+        Session session;
+        try {
+            session = sessionFactory.getCurrentSession();
+        } catch (HibernateException e) {
+            session = sessionFactory.openSession();
+        }
+        session.saveOrUpdate(student);
+    }
+
+    @Transactional
+    public void merge(Student student) {
+        Session session;
+        try {
+            session = sessionFactory.getCurrentSession();
+        } catch (HibernateException e) {
+            session = sessionFactory.openSession();
+        }
+        session.merge(student);
     }
 
     @Transactional
